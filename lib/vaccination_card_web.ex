@@ -37,23 +37,39 @@ defmodule VaccinationCardWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller,
-        formats: [:html, :json],
-        layouts: [html: VaccinationCardWeb.Layouts]
+      use Phoenix.Controller, namespace: VaccinationCardWeb
 
       import Plug.Conn
       import VaccinationCardWeb.Gettext
-
-      unquote(verified_routes())
+      alias VaccinationCardWeb.Router.Helpers, as: Routes
     end
   end
 
-  def verified_routes do
+  def view do
     quote do
-      use Phoenix.VerifiedRoutes,
-        endpoint: VaccinationCardWeb.Endpoint,
-        router: VaccinationCardWeb.Router,
-        statics: VaccinationCardWeb.static_paths()
+      use Phoenix.View,
+        root: "lib/vaccination_card_web/templates",
+        namespace: VaccinationCardWeb
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+
+      # Include shared imports and aliases for views
+      unquote(view_helpers())
+    end
+  end
+
+  defp view_helpers do
+    quote do
+      # Use all HTML functionality (forms, tags, etc)
+      import Phoenix.HTML
+
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+      import VaccinationCardWeb.ErrorHelpers
+      import VaccinationCardWeb.Gettext
+      alias VaccinationCardWeb.Router.Helpers, as: Routes
     end
   end
 

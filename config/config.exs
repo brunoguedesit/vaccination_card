@@ -7,6 +7,10 @@
 # General application configuration
 import Config
 
+config :vaccination_card, VaccinationCard.Accounts.Auth.Guardian,
+  issuer: "vaccination_card",
+  secret_key: "N3Xl5p42peFHry6ZERJFY2bzY5u/AuXk1UEJw9NXQgIDZ5kLEWZeZvn+vAz1EFnn"
+
 config :vaccination_card,
   ecto_repos: [VaccinationCard.Repo],
   generators: [timestamp_type: :utc_datetime]

@@ -32,17 +32,23 @@ defmodule VaccinationCard.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.11"},
-      {:phoenix_ecto, "~> 4.4"},
+      {:phoenix, "~> 1.6.16"},
+      {:phoenix_html, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.1"},
+      {:phoenix_view, "~> 2.0.3"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"}
+      {:bandit, "~> 1.2"},
+      {:comeonin, "~> 4.1"},
+      {:argon2_elixir, "~> 1.3"},
+      {:guardian, "~> 1.2"},
+      {:uuid, "~> 1.1"}
     ]
   end
 
