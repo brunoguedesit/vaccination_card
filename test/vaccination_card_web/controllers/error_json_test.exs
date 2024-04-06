@@ -2,7 +2,9 @@ defmodule VaccinationCardWeb.ErrorJSONTest do
   use VaccinationCardWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert VaccinationCardWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert VaccinationCardWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do

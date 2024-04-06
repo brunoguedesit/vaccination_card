@@ -4,6 +4,8 @@ defmodule VaccinationCard.Accounts.VaccineType do
   @primary_key {:id, :integer, []}
   @foreign_key_type Ecto.UUID
 
+  import Ecto.Changeset
+
   schema "vaccine_types" do
     field :name, :string
 
@@ -14,5 +16,6 @@ defmodule VaccinationCard.Accounts.VaccineType do
     vaccine_type
     |> Ecto.Changeset.cast(params, [:name, :id])
     |> Ecto.Changeset.validate_required([:name])
+    |> unique_constraint(:name, "There is a vaccine with this name")
   end
 end

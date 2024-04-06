@@ -20,6 +20,8 @@ defmodule VaccinationCard.Accounts.User do
     :role
   ]
 
+  @valid_sex_values ["male", "female"]
+
   schema "users" do
     field :email, :string
     field :first_name, :string
@@ -40,6 +42,7 @@ defmodule VaccinationCard.Accounts.User do
     user
     |> cast(params, @required_params)
     |> validate_required(@required_params)
+    |> validate_inclusion(:sex, @valid_sex_values, message: "must be either 'male' or 'female'")
     |> validate_format(:email, ~r/@/, message: "invalid format email")
     |> update_change(:email, &String.downcase(&1))
     |> validate_length(:password,

@@ -5,8 +5,25 @@ defmodule VaccinationCardWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug VaccinationCard.Accounts.Auth.Pipeline
+  end
+
+  scope "/api/auth", VaccinationCardWeb do
+    post "/signup", UserController, :signup
+    post "/signin", UserController, :signin
+  end
+
   scope "/api", VaccinationCardWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
+
+    get "/vaccine_card", VaccinesController, :vaccine_card
+    get "/vaccine_types", VaccinesController, :vaccine_types
+
+    post "/vaccines/take-dose", VaccinesController, :take_dose
+    post "/vaccines/register", VaccinesController, :register_vaccine
+
+    delete "/vaccines/delete", VaccinesController, :delete_vaccine
   end
 
   # Enable LiveDashboard in development

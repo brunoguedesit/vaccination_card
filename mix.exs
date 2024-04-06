@@ -48,7 +48,13 @@ defmodule VaccinationCard.MixProject do
       {:comeonin, "~> 4.1"},
       {:argon2_elixir, "~> 1.3"},
       {:guardian, "~> 1.2"},
-      {:uuid, "~> 1.1"}
+      {:uuid, "~> 1.1"},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.8"},
+      {:faker, "~> 0.17.0"},
+      {:faker_elixir_octopus, "> 0.0.0"}
+
     ]
   end
 

@@ -14,25 +14,31 @@ defmodule VaccinationCardWeb.ConnCase do
   by setting `use VaccinationCardWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
+  alias Ecto.Adapters.SQL.Sandbox
 
   use ExUnit.CaseTemplate
 
   using do
     quote do
-      # The default endpoint for testing
-      @endpoint VaccinationCardWeb.Endpoint
-
-      use VaccinationCardWeb, :verified_routes
-
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import VaccinationCardWeb.ConnCase
+
+      alias VaccinationCardWeb.Router.Helpers, as: Routes
+
+      # The default endpoint for testing
+      @endpoint VaccinationCardWeb.Endpoint
     end
   end
 
   setup tags do
-    VaccinationCard.DataCase.setup_sandbox(tags)
+    :ok = Sandbox.checkout(VaccinationCard.Repo)
+
+    unless tags[:async] do
+      Sandbox.mode(VaccinationCard.Repo, {:shared, self()})
+    end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
