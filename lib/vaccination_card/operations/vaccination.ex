@@ -26,7 +26,8 @@ defmodule VaccinationCard.Operations.Vaccination do
     body = %{name: name}
 
     %VaccinationCard.Accounts.VaccineType{}
-    |> VaccineType.changeset(body)
+    |> Ecto.Changeset.cast(body, [:name])
+    |> Ecto.Changeset.unique_constraint(:name)
     |> Repo.insert()
   end
 

@@ -30,6 +30,7 @@ $ git clone https://github.com/brunoguedesit/vaccination_card
 ```bash
 # Get project dependencies & run the stack
 $ mix deps.get
+$ mix ecto.setup
 $ mix phx.server
 
 # Run the tests
