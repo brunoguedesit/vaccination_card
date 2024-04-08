@@ -115,8 +115,6 @@ defmodule VaccinationCardWeb.UserControllerTest do
       conn = post(conn, Routes.user_path(conn, :signin), email: user_params["email"], password: "test123")
       result = json_response(conn, 201)
 
-      IO.inspect(result, label: :result)
-
       assert "test@test.com" == result["data"]["email"]
       assert "user test 1" == result["data"]["accounts"]["vaccine_card"]["full_name"]
     end
